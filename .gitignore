@@ -1,0 +1,7 @@
+node_modules/
+hosting/dist/
+functions/lib/
+.firebase/
+*.local
+.env
+.env.*
