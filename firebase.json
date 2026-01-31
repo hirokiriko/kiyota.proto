@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "kiyota-proto-dx",
     "public": "hosting/dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
