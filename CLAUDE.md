@@ -10,3 +10,9 @@
 4. デプロイ完了後、以下の URL で確認するよう案内する
 
 URL: https://kiyota-proto-dx.web.app
+
+## Cloud Functions 注意事項
+
+- Cloud Functions は **GCFv2（第2世代）** でデプロイ済み。**絶対に v1 にダウングレードしないこと。**
+- Firebase は一度 v2 でデプロイした関数を v1 に変更できない（`Functions cannot be downgraded from GCFv2 to GCFv1` エラーになる）。
+- import は `firebase-functions/v2/https` を使用すること。
