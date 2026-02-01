@@ -1,4 +1,4 @@
-import { onRequest } from "firebase-functions/v2/https";
+import * as functions from "firebase-functions/v1";
 import * as admin from "firebase-admin";
 import { Order, Customer } from "./types";
 
@@ -8,11 +8,20 @@ const db = admin.firestore();
 // ===== CORS ヘルパー =====
 function withCors(
   handler: (
-    req: import("firebase-functions/v2/https").Request,
-    res: import("express").Response
+    req: functions.https.Request,
+    res: functions.Response
   ) => Promise<void>
 ) {
-  return onRequest({ cors: true }, async (req, res) => {
+  return functions.https.onRequest(async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+    if (req.method === "OPTIONS") {
+      res.status(204).send("");
+      return;
+    }
+
     try {
       await handler(req, res);
     } catch (error: any) {
